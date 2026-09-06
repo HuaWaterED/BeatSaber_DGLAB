@@ -32,14 +32,15 @@ public sealed class BluetoothScanner : IDisposable
         _selector = BluetoothDevice.GetDeviceSelectorFromPairingState(includePaired);
 
         // 这些属性在订阅时一并请求,避免后续反复查表
+        // 注意:必须是 canonical property name (System.Devices.Aep.* 形式)。
+        // Win32 上有 PROPERTYKEY 但 PROPSYS 未注册 canonical name 的属性会触发 0x8002802B,
+        // 所以不是每个 DEVPKEY_Aep_* 都能这么用。
         _properties = new[]
         {
             "System.Devices.Aep.DeviceAddress",
             "System.Devices.Aep.IsConnected",
             "System.Devices.Aep.IsPaired",
             "System.Devices.Aep.SignalStrength",
-            "System.Devices.Aep.Bluetooth.Le.IsConnectable",
-            "System.Devices.Aep.Bluetooth.Le.IsDiscoverable",
         };
     }
 

@@ -60,7 +60,6 @@ internal class Program
         var address = Prop(device, "System.Devices.Aep.DeviceAddress") ?? "?";
         var rssi = Prop(device, "System.Devices.Aep.SignalStrength") ?? "?";
         var paired = Prop(device, "System.Devices.Aep.IsPaired") ?? "?";
-        var connectable = Prop(device, "System.Devices.Aep.Bluetooth.Le.IsConnectable") ?? "?";
 
         var isDglab = BluetoothScanner.DglabNameHints
             .Any(h => name.Contains(h, StringComparison.OrdinalIgnoreCase));
@@ -69,7 +68,7 @@ internal class Program
         if (isDglab || seen.Add(device.Id))
         {
             var marker = isDglab ? " ★ DGLAB?" : "  ";
-            Console.WriteLine($"{tag} {marker}{name,-24} {address,-20} RSSI:{rssi,4} dBm  paired:{paired}  conn:{connectable}");
+            Console.WriteLine($"{tag} {marker}{name,-24} {address,-20} RSSI:{rssi,4} dBm  paired:{paired}");
         }
     }
 
