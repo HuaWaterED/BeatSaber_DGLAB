@@ -29,8 +29,9 @@ public sealed class BluetoothScanner : IDisposable
 
     public BluetoothScanner(bool includePaired = false)
     {
-        // false = 只看未配对(更接近"主动扫描"的语义);true = 已配对也包含
-        _selector = BluetoothDevice.GetDeviceSelectorFromPairingState(includePaired);
+        // 注意:DGLAB V3 是 BLE-only 设备 (走 GATT 0x180C/0x180A),
+        //      必须用 BluetoothLEDevice 的 selector,经典 BluetoothDevice selector 看不到
+        _selector = BluetoothLEDevice.GetDeviceSelectorFromPairingState(includePaired);
 
         // 这些属性在订阅时一并请求,避免后续反复查表
         // 注意:必须是 canonical property name (System.Devices.Aep.* 形式)。
