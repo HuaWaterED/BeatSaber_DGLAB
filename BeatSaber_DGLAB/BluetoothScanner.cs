@@ -13,6 +13,7 @@ public sealed class BluetoothScanner : IDisposable
     // DGLAB 主机广播名/常见命名规则,扫描时方便高亮过滤
     public static readonly string[] DglabNameHints =
     {
+        DglabProtocol.V3DeviceName,   // "47L121000" 脉冲主机 3.0
         "D-LAB", "D-Lab", "DLAB", "DG-LAB", "DG Lab",
         "Coyote", "郊激", "郊激仪",
     };
